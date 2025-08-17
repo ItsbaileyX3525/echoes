@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://ds1isc65v0qum"]
+
+[ext_resource type="Script" uid="uid://dkoo6du2yaqj1" path="res://Scripts/Main.gd" id="1_kln2b"]
+[ext_resource type="Script" uid="uid://boor1cxpmudia" path="res://Scripts/Player.gd" id="2_rgh2o"]
+[ext_resource type="Script" uid="uid://kmy25cjmscoy" path="res://Scripts/Ghost.gd" id="3_pbw6q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1gob"]
+size = Vector2(37, 95)
+
+[sub_resource type="Gradient" id="Gradient_jw32o"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_50glp"]
+gradient = SubResource("Gradient_jw32o")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+size = Vector2(1646, 40)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_kln2b")
+
+[node name="BG" type="ColorRect" parent="."]
+offset_left = -2018.0
+offset_top = -2415.0
+offset_right = 4554.0
+offset_bottom = 2928.0
+color = Color(0, 0.557203, 0.557356, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 415.0
+offset_top = 558.0
+offset_right = 483.0
+offset_bottom = 590.0
+color = Color(0.740785, 0.531076, 0.00968044, 1)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(29, 593)
+script = ExtResource("2_rgh2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(8.5, -11.5)
+shape = SubResource("RectangleShape2D_v1gob")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(8.5, -11.5)
+scale = Vector2(0.144531, 95)
+texture = SubResource("GradientTexture1D_50glp")
+
+[node name="Ghost" type="CharacterBody2D" parent="."]
+position = Vector2(-49, 571)
+script = ExtResource("3_pbw6q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost"]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_v1gob")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ghost"]
+self_modulate = Color(1, 1, 1, 0.396078)
+position = Vector2(0.500001, 13.5)
+scale = Vector2(0.144531, 95)
+texture = SubResource("GradientTexture1D_50glp")
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level"]
+position = Vector2(-10, 635)
+
+[node name="ColorRect" type="ColorRect" parent="Level/StaticBody2D"]
+offset_left = -154.0
+offset_right = 1493.0
+offset_bottom = 40.0
+color = Color(0.0333789, 0.430523, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D"]
+position = Vector2(669, 20)
+shape = SubResource("RectangleShape2D_kln2b")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="TimerLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "60"
