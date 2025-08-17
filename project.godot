@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="Echoes"
+config/version="1"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[gui]
+
+theme/custom_font="uid://dbafvpa5rh6y0"
 
 [input]
 

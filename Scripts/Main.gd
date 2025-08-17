@@ -2,34 +2,61 @@ extends Node2D
 
 @onready var player = $Player
 @onready var ghost = $Ghost
-@onready var timer = $Timer
 @onready var label = $TimerLabel
+@onready var initial_position: Node2D = $InitialPosition
+@onready var timer: Timer = $Timer
 
-var waiting_for_restart: bool = false
+enum State { IDLE, RECORDING, REPLAYING }
+var state: State = State.IDLE
 
 func _ready() -> void:
 	ghost.hide()
-	timer.start()
+	ghost.connect("finished_recording", _on_ghost_finished)
+	timer.wait_time = 10.0
+	timer.one_shot = true
+	label.text = "Press R to record"
 
 func _process(delta: float) -> void:
-	if not waiting_for_restart:
-		label.text = str(int(timer.time_left))
-	else:
-		label.text = "Press R to restart"
+	if Input.is_action_just_pressed("restart"):
+		match state:
+			State.IDLE:
+				start_recording()
+			State.RECORDING:
+				stop_recording_and_replay()
+			State.REPLAYING:
+				pass # do nothing
 
-	if timer.is_stopped() and not waiting_for_restart:
-		# stop auto-restart, wait for player input
-		waiting_for_restart = true
-		player.is_recording = false
+	# Update timer label if recording
+	if state == State.RECORDING:
+		label.text = "Recording... %ss" % int(timer.time_left)
 
-	if waiting_for_restart and Input.is_action_just_pressed("restart"):
-		_start_new_loop()
-
-func _start_new_loop() -> void:
-	ghost.start_replay(player.recording)
-	player.global_position = Vector2.ZERO
-	player.velocity = Vector2.ZERO
-	player.recording.clear()
+# --- State transitions ---
+func start_recording() -> void:
+	state = State.RECORDING
 	player.is_recording = true
+	player.recording.clear()
 	timer.start()
-	waiting_for_restart = false
+	label.text = "Recording... 10s"
+
+func stop_recording_and_replay() -> void:
+	state = State.REPLAYING
+	player.is_recording = false
+	ghost.start_replay(player.recording)
+	label.text = "Replaying..."
+	player.global_position = initial_position.global_position
+	player.velocity = Vector2.ZERO
+
+func _on_timer_timeout() -> void:
+	if state == State.RECORDING:
+		stop_recording_and_replay()
+
+func _on_ghost_finished() -> void:
+	state = State.IDLE
+	label.text = "Replay finished! Press R to record again"
+	clear_recording()
+
+func clear_recording() -> void:
+	player.recording.clear()
+	player.is_recording = false
+	ghost.hide()
+	ghost.position.y = 99999
