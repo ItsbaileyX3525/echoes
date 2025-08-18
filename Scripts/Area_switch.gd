@@ -25,9 +25,10 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		if not permenant:
-			line_2d.default_color = Color.CRIMSON
-			activated = false
-			left.emit()
+			if perm_ghost:
+				line_2d.default_color = Color.DARK_MAGENTA
+			else:
+				line_2d.default_color = Color.CRIMSON
 			activated = false
 			left.emit()
 	if body.name == "Ghost":
@@ -39,6 +40,8 @@ func _on_body_exited(body: Node2D) -> void:
 			left.emit()
 
 func reset_state() -> void:
+	activated = false
+	left.emit()
 	if perm_ghost:
 		line_2d.default_color = Color.DARK_MAGENTA
 	elif permenant:
