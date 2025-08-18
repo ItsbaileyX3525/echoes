@@ -22,12 +22,13 @@ var state: State = State.IDLE
 
 var tutorial_beat: bool = false
 
-var on_level: int = 0
+@export var on_level: int = 0
 
 @onready var levels: Array = [
 	$Level/Level1,
 	$Level/Level2,
 	$Level/Level3,
+	$Level/Level4,
 ]
 
 func _ready() -> void:
@@ -38,7 +39,6 @@ func _ready() -> void:
 	label.text = "Press R to record"
 
 func _process(delta: float) -> void:
-	print(on_level)
 	if Input.is_action_just_pressed("restart"):
 		match state:
 			State.IDLE:
