@@ -4,6 +4,7 @@ extends Area2D
 
 @export var permenant: bool = false
 @export var perm_ghost: bool = false
+var activated: bool = false
 
 signal entered
 signal left
@@ -16,20 +17,25 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player" or body.name == "Ghost":
-		line_2d.default_color = Color.GREEN
-		entered.emit()
+		if not activated:
+			activated = true
+			line_2d.default_color = Color.GREEN
+			entered.emit()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		if not permenant:
-			if perm_ghost:
-				line_2d.default_color = Color.DARK_MAGENTA
-			else:
-				line_2d.default_color = Color.CRIMSON
+			line_2d.default_color = Color.CRIMSON
+			activated = false
+			left.emit()
+			activated = false
 			left.emit()
 	if body.name == "Ghost":
+		if permenant:
+			return
 		if not perm_ghost:
 			line_2d.default_color = Color.CRIMSON
+			activated = false
 			left.emit()
 
 func reset_state() -> void:

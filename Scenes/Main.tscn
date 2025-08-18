@@ -1,15 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://ds1isc65v0qum"]
+[gd_scene load_steps=21 format=3 uid="uid://ds1isc65v0qum"]
 
 [ext_resource type="Script" uid="uid://dkoo6du2yaqj1" path="res://Scripts/Main.gd" id="1_kln2b"]
 [ext_resource type="Script" uid="uid://boor1cxpmudia" path="res://Scripts/Player.gd" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://kmy25cjmscoy" path="res://Scripts/Ghost.gd" id="3_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://di441bee70a2b" path="res://Scenes/AreaSwitch.tscn" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://d3owrqoaan6po" path="res://Assets/paralax/10_Sky.png" id="5_1p5hy"]
+[ext_resource type="Texture2D" uid="uid://d16db5vp0j7ue" path="res://Assets/paralax/09_Forest.png" id="6_h1m7h"]
+[ext_resource type="Texture2D" uid="uid://b6xpigc5pgxb7" path="res://Assets/paralax/08_Forest.png" id="7_erwvk"]
+[ext_resource type="Texture2D" uid="uid://kongw3t88mwx" path="res://Assets/paralax/07_Forest.png" id="8_2w5on"]
+[ext_resource type="Texture2D" uid="uid://266nayglu0qc" path="res://Assets/paralax/06_Forest.png" id="9_346fj"]
+[ext_resource type="Texture2D" uid="uid://jq0ly5jkmtw0" path="res://Assets/paralax/05_Particles.png" id="10_0sclb"]
+[ext_resource type="Texture2D" uid="uid://balyqg0eyf2n4" path="res://Assets/paralax/04_Forest.png" id="11_sxkr1"]
+[ext_resource type="Texture2D" uid="uid://b8ja8hcahxa6p" path="res://Assets/paralax/03_Particles.png" id="12_fq0cl"]
+[ext_resource type="Texture2D" uid="uid://b7bvr120sv0qm" path="res://Assets/paralax/02_Bushes.png" id="13_hwpts"]
+[ext_resource type="Texture2D" uid="uid://bqvoxif32qjqp" path="res://Assets/paralax/01_Mist.png" id="14_jyqft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbw6q"]
+size = Vector2(90.299, 201.244)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
-size = Vector2(1646, 40)
+size = Vector2(6273, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1gob"]
-size = Vector2(37, 95)
+size = Vector2(89, 227)
 
 [sub_resource type="Gradient" id="Gradient_jw32o"]
 offsets = PackedFloat32Array(1)
@@ -19,12 +32,13 @@ colors = PackedColorArray(1, 0, 1, 1)
 gradient = SubResource("Gradient_jw32o")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgh2o"]
-size = Vector2(37, 95)
+size = Vector2(88.5, 227.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kln2b")
 
 [node name="BG" type="ColorRect" parent="."]
+visible = false
 offset_left = -2018.0
 offset_top = -2415.0
 offset_right = 4554.0
@@ -32,67 +46,269 @@ offset_bottom = 2928.0
 color = Color(0, 0.557203, 0.557356, 1)
 
 [node name="InitialPosition" type="Node2D" parent="."]
-position = Vector2(38, 582)
+position = Vector2(38, 990)
 
 [node name="Level" type="Node2D" parent="."]
+position = Vector2(0, 403)
+
+[node name="Door" type="Area2D" parent="Level"]
+position = Vector2(1844, 411)
+scale = Vector2(1.36214, 1.36214)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Door"]
+position = Vector2(4.03784, 61.6221)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_pbw6q")
+
+[node name="Node2D" type="Node2D" parent="Level/Door"]
+position = Vector2(-12, -13)
+
+[node name="Line2D" type="Line2D" parent="Level/Door/Node2D"]
+position = Vector2(-22, -22)
+scale = Vector2(0.377094, 0.379977)
+points = PackedVector2Array(-22.5, 0, 200, 0, 200, 500, 0, 500, 0, 0)
+width = 44.94
+default_color = Color(0.678431, 0.0392157, 0.176471, 1)
 
 [node name="Floor" type="StaticBody2D" parent="Level"]
 position = Vector2(-10, 635)
 
 [node name="ColorRect" type="ColorRect" parent="Level/Floor"]
-offset_left = -154.0
-offset_right = 1493.0
+offset_left = -2615.0
+offset_right = 3132.0
 offset_bottom = 40.0
 color = Color(0.0333789, 0.430523, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Floor"]
-position = Vector2(669, 20)
+position = Vector2(-9.5, 20)
+shape = SubResource("RectangleShape2D_kln2b")
+
+[node name="Floor2" type="StaticBody2D" parent="Level"]
+position = Vector2(-10, -437)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Floor2"]
+offset_left = -2615.0
+offset_top = -788.0
+offset_right = 3132.0
+offset_bottom = 40.0
+color = Color(0.0333789, 0.430523, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Floor2"]
+position = Vector2(-9.5, 20)
 shape = SubResource("RectangleShape2D_kln2b")
 
 [node name="AreaSwitch" parent="Level" instance=ExtResource("4_rgh2o")]
-position = Vector2(439, 586)
+position = Vector2(193, 586)
+permenant = true
+
+[node name="AreaSwitch2" parent="Level" instance=ExtResource("4_rgh2o")]
+position = Vector2(882, 586)
 perm_ghost = true
 
+[node name="AreaSwitch3" parent="Level" instance=ExtResource("4_rgh2o")]
+position = Vector2(1518, 586)
+
+[node name="Tutorial" type="Node2D" parent="Level"]
+position = Vector2(-48, -700)
+scale = Vector2(1.32452, 1.32452)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Tutorial"]
+offset_left = 35.0
+offset_top = 764.0
+offset_right = 291.0
+offset_bottom = 838.0
+color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="Label" type="Label" parent="Level/Tutorial/ColorRect"]
+layout_mode = 0
+offset_right = 2281.0
+offset_bottom = 659.0
+scale = Vector2(0.112229, 0.112229)
+theme_override_font_sizes/font_size = 161
+text = "Orange means once entered
+they are permanently 
+activated once entered"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="Level/Tutorial"]
+offset_left = 536.045
+offset_top = 762.0
+offset_right = 814.045
+offset_bottom = 838.0
+color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="Label" type="Label" parent="Level/Tutorial/ColorRect2"]
+layout_mode = 0
+offset_right = 2477.0
+offset_bottom = 677.0
+scale = Vector2(0.112229, 0.112229)
+theme_override_font_sizes/font_size = 161
+text = "Magenta means the ghost will 
+keep them active until the
+recording ends"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="Level/Tutorial"]
+offset_left = 1020.75
+offset_top = 738.0
+offset_right = 1276.75
+offset_bottom = 837.0
+color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="Label" type="Label" parent="Level/Tutorial/ColorRect3"]
+layout_mode = 0
+offset_right = 2281.0
+offset_bottom = 659.0
+scale = Vector2(0.112229, 0.112229)
+theme_override_font_sizes/font_size = 161
+text = "Finally, red means that no 
+matter who entered, when 
+you leave, the area will 
+turn off"
+horizontal_alignment = 1
+
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(29, 593)
+position = Vector2(-184, 1001)
 script = ExtResource("2_rgh2o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(8.5, -11.5)
+position = Vector2(34.5, -77.5)
 shape = SubResource("RectangleShape2D_v1gob")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(8.5, -11.5)
-scale = Vector2(0.144531, 95)
+position = Vector2(34.5, -78)
+scale = Vector2(0.347656, 228)
 texture = SubResource("GradientTexture1D_50glp")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(8, -461)
+
+[node name="ColorRect" type="ColorRect" parent="Player/Camera2D"]
+offset_left = -953.0
+offset_top = -528.0
+offset_right = -390.0
+offset_bottom = -475.0
+color = Color(0.230315, 0.230315, 0.230315, 1)
+
+[node name="TimerLabel" type="Label" parent="Player/Camera2D/ColorRect"]
+layout_mode = 0
+offset_right = 11081.0
+offset_bottom = 1043.0
+scale = Vector2(0.0508067, 0.0508067)
+theme_override_font_sizes/font_size = 494
+text = "Press R to start recording"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Ghost" type="CharacterBody2D" parent="."]
-position = Vector2(-49, 571)
+position = Vector2(-638, 977)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_pbw6q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost"]
-position = Vector2(0, 13)
+position = Vector2(25.75, -53.25)
 shape = SubResource("RectangleShape2D_rgh2o")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Ghost"]
 self_modulate = Color(1, 1, 1, 0.396078)
-position = Vector2(0.500001, 13.5)
-scale = Vector2(0.144531, 95)
+position = Vector2(26, -53)
+scale = Vector2(0.34375, 228)
 texture = SubResource("GradientTexture1D_50glp")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 
-[node name="TimerLabel" type="Label" parent="."]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 295.0
-offset_bottom = 38.0
-theme_override_font_sizes/font_size = 24
-text = "Press R to start recording"
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.18, 0.18)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("5_1p5hy")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("6_h1m7h")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.25)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("7_erwvk")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource("8_2w5on")
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture = ExtResource("9_346fj")
+centered = false
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+texture = ExtResource("10_0sclb")
+centered = false
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
+texture = ExtResource("11_sxkr1")
+centered = false
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer8"]
+texture = ExtResource("12_fq0cl")
+centered = false
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer9"]
+texture = ExtResource("13_hwpts")
+centered = false
+
+[node name="ParallaxLayer10" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer10"]
+visible = false
+texture = ExtResource("14_jyqft")
+centered = false
+
+[connection signal="body_entered" from="Level/Door" to="." method="_on_area_2d_body_entered"]
+[connection signal="entered" from="Level/AreaSwitch" to="." method="_on_area_switch_entered"]
+[connection signal="left" from="Level/AreaSwitch" to="." method="_on_area_switch_left"]
+[connection signal="entered" from="Level/AreaSwitch2" to="." method="_on_area_switch_2_entered"]
+[connection signal="left" from="Level/AreaSwitch2" to="." method="_on_area_switch_2_left"]
+[connection signal="entered" from="Level/AreaSwitch3" to="." method="_on_area_switch_3_entered"]
+[connection signal="left" from="Level/AreaSwitch3" to="." method="_on_area_switch_3_left"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

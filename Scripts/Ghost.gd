@@ -3,7 +3,7 @@ extends CharacterBody2D
 var playback: Array[Vector2] = []
 var frame: int = 0
 var active: bool = false
-@onready var timer_label: Label = $"../TimerLabel"
+@onready var timer_label: Label = $"../Player/Camera2D/ColorRect/TimerLabel"
 
 signal finished_recording
 
