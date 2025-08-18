@@ -4,16 +4,20 @@ extends Node2D
 @onready var ghost = $Ghost
 @onready var initial_position: Node2D = $InitialPosition
 @onready var timer: Timer = $Timer
-@onready var line_2d: Line2D = $Level/Level1/Door/Node2D/Line2D
+@onready var door1: Line2D = $Level/Level1/Door/Node2D/Line2D
 @onready var label: Label = $Player/CanvasLayer/ColorRect/TimerLabel
-@onready var border_1: StaticBody2D = $Level/Level1/Border1
+@onready var moving_plat_anim: AnimationPlayer = $Level/Level1/MovingPlat/AnimationPlayer
+@onready var door2: Line2D = $Level/Level1/Door2/Node2D/Line2D
+@onready var door3: Line2D = $Level/Level1/Door3/Node2D/Line2D
+@onready var lift3_anim: AnimationPlayer = $Level/Level1/Lift3/AnimationPlayer
+
+var can_continue: bool = false
+var bodies_stored: Array = []
 
 var stored_position: Vector2
 enum State { IDLE, RECORDING, REPLAYING }
 var state: State = State.IDLE
 
-var max_check_list = 3
-var check_list = 0
 var tutorial_beat: bool = false
 
 var on_level: int = 0
@@ -31,7 +35,6 @@ func _ready() -> void:
 	label.text = "Press R to record"
 
 func _process(delta: float) -> void:
-	print(on_level)
 	if Input.is_action_just_pressed("restart"):
 		match state:
 			State.IDLE:
@@ -80,41 +83,49 @@ func clear_recording() -> void:
 			if e.perm_ghost:
 				e.reset_state()
 
-func update_checklist(update: bool) -> void:
-	if update:
-		check_list += 1
-	else:
-		check_list -= 1 
-
-	print(check_list)
-
-	if check_list >= max_check_list and not tutorial_beat:
-		line_2d.default_color = Color.from_rgba8(50, 205, 50, 255)
-	else:
-		if not tutorial_beat:
-			line_2d.default_color = Color.from_rgba8(173, 10, 45, 255)
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		if check_list >= max_check_list:
-			on_level += 1
-			tutorial_beat = true
-			border_1.position.y += 99999
+		$Level/Level1/Lift/AnimationPlayer.play("move")
 
 func _on_area_switch_entered() -> void:
-	update_checklist(true)
+	door1.default_color = Color.from_rgba8(50, 205, 50, 255)
+
+func _on_door_2_body_entered(body: Node2D) -> void:
+	$Level/Level1/Lift2/AnimationPlayer.play("move")
 
 func _on_area_switch_2_entered() -> void:
-	update_checklist(true)
-
-func _on_area_switch_3_entered() -> void:
-	update_checklist(true)
-
-func _on_area_switch_3_left() -> void:
-	update_checklist(false)
+	moving_plat_anim.play("move")
 
 func _on_area_switch_2_left() -> void:
-	update_checklist(false)
+	moving_plat_anim.pause()
 
-func _on_area_switch_left() -> void:
-	update_checklist(false)
+func _on_area_switch_4_entered() -> void:
+	door2.default_color = Color.from_rgba8(50, 205, 50, 255)
+
+func _on_door_3_body_entered(body: Node2D) -> void:
+	bodies_stored.append(body)
+	if body.name == "Player" and can_continue and not tutorial_beat:
+		tutorial_beat = true
+		on_level += 1
+		$Level/Level1/Lift4/AnimationPlayer.play("move")
+
+func _on_area_switch_3_entered() -> void:
+	lift3_anim.play("move")
+
+func _on_area_switch_3_left() -> void:
+	lift3_anim.play_backwards("move")
+
+func _on_area_switch_5_entered() -> void:
+	can_continue = true
+	door3.default_color = Color.from_rgba8(50, 205, 50, 255)
+	if len(bodies_stored) > 0:
+		for e in bodies_stored:
+			if e.name == "Player" and can_continue and not tutorial_beat:
+				tutorial_beat = true
+				on_level += 1
+				$Level/Level1/Lift4/AnimationPlayer.play("move")
+
+func _on_area_switch_5_left() -> void:
+	can_continue = false
+	if not tutorial_beat:
+		door3.default_color = Color.from_rgba8(173, 10, 45, 255)

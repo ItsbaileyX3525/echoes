@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ds1isc65v0qum"]
+[gd_scene load_steps=52 format=3 uid="uid://ds1isc65v0qum"]
 
 [ext_resource type="Script" uid="uid://dkoo6du2yaqj1" path="res://Scripts/Main.gd" id="1_kln2b"]
 [ext_resource type="Script" uid="uid://boor1cxpmudia" path="res://Scripts/Player.gd" id="2_rgh2o"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cdx22070og4ih" path="res://Assets/Decals/grey-circle.png" id="4_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://di441bee70a2b" path="res://Scenes/AreaSwitch.tscn" id="4_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://d3owrqoaan6po" path="res://Assets/paralax/10_Sky.png" id="5_1p5hy"]
+[ext_resource type="Texture2D" uid="uid://cv5ky27vgxf2l" path="res://Assets/Decals/Face.png" id="5_346fj"]
+[ext_resource type="Texture2D" uid="uid://ctyycb82ubdg" path="res://Assets/Decals/Body.png" id="6_0sclb"]
 [ext_resource type="Texture2D" uid="uid://d16db5vp0j7ue" path="res://Assets/paralax/09_Forest.png" id="6_h1m7h"]
 [ext_resource type="Texture2D" uid="uid://b6xpigc5pgxb7" path="res://Assets/paralax/08_Forest.png" id="7_erwvk"]
 [ext_resource type="Texture2D" uid="uid://kongw3t88mwx" path="res://Assets/paralax/07_Forest.png" id="8_2w5on"]
@@ -26,8 +28,214 @@ size = Vector2(67262, 166)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1m7h"]
 size = Vector2(1496, 166)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0sclb"]
+size = Vector2(40, 1033)
+
+[sub_resource type="Animation" id="Animation_jyqft"]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1929, 320), Vector2(1929, -246)]
+}
+
+[sub_resource type="Animation" id="Animation_3tgeq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1929, 320)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4ay3"]
+_data = {
+&"RESET": SubResource("Animation_3tgeq"),
+&"move": SubResource("Animation_jyqft")
+}
+
+[sub_resource type="Animation" id="Animation_c4ay3"]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3828, -196)]
+}
+
+[sub_resource type="Animation" id="Animation_aht7i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3828, 320)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jffn"]
+_data = {
+&"RESET": SubResource("Animation_aht7i"),
+&"move": SubResource("Animation_c4ay3")
+}
+
+[sub_resource type="Animation" id="Animation_4n42c"]
+resource_name = "move"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5122, 320), Vector2(5122, -224)]
+}
+
+[sub_resource type="Animation" id="Animation_c5snn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5122, 320)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvtyr"]
+_data = {
+&"RESET": SubResource("Animation_c5snn"),
+&"move": SubResource("Animation_4n42c")
+}
+
+[sub_resource type="Animation" id="Animation_xvtyr"]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5808, 320), Vector2(5808, -207)]
+}
+
+[sub_resource type="Animation" id="Animation_u7mjy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5808, 320)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4yxf6"]
+_data = {
+&"RESET": SubResource("Animation_u7mjy"),
+&"move": SubResource("Animation_xvtyr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpo4j"]
+size = Vector2(186, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4n42c"]
+size = Vector2(367, 40)
+
+[sub_resource type="Animation" id="Animation_5jffn"]
+resource_name = "move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3105, 517), Vector2(3105, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_kpo4j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3105, 517)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4n42c"]
+_data = {
+&"RESET": SubResource("Animation_kpo4j"),
+&"move": SubResource("Animation_5jffn")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_erwvk"]
 size = Vector2(40, 1033)
+
+[sub_resource type="Animation" id="Animation_0sclb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3228, 320)]
+}
 
 [sub_resource type="Animation" id="Animation_346fj"]
 resource_name = "move"
@@ -45,21 +253,6 @@ tracks/0/keys = {
 "values": [Vector2(3228, 320), Vector2(3228, -102)]
 }
 
-[sub_resource type="Animation" id="Animation_0sclb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3228, 320)]
-}
-
 [sub_resource type="Animation" id="Animation_sxkr1"]
 resource_name = "move_back"
 length = 0.5
@@ -73,6 +266,21 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_346fj"]
 size = Vector2(203, 40)
+
+[sub_resource type="Animation" id="Animation_hwpts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2794, 525)]
+}
 
 [sub_resource type="Animation" id="Animation_fq0cl"]
 resource_name = "move"
@@ -90,21 +298,6 @@ tracks/0/keys = {
 "values": [Vector2(2794, 525), Vector2(2794, -95)]
 }
 
-[sub_resource type="Animation" id="Animation_hwpts"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2794, 525)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jyqft"]
 _data = {
 &"RESET": SubResource("Animation_hwpts"),
@@ -117,15 +310,8 @@ size = Vector2(67262, 103)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1gob"]
 size = Vector2(89, 227)
 
-[sub_resource type="Gradient" id="Gradient_jw32o"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 0, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_50glp"]
-gradient = SubResource("Gradient_jw32o")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgh2o"]
-size = Vector2(88.5, 227.5)
+size = Vector2(89, 227.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kln2b")
@@ -164,6 +350,42 @@ points = PackedVector2Array(-22.5, 0, 200, 0, 200, 500, 0, 500, 0, 0)
 width = 44.94
 default_color = Color(0.678431, 0.0392157, 0.176471, 1)
 
+[node name="Door2" type="Area2D" parent="Level/Level1"]
+position = Vector2(3737, -178)
+scale = Vector2(1.36214, 1.36214)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Door2"]
+position = Vector2(4.03784, 61.6221)
+shape = SubResource("RectangleShape2D_pbw6q")
+
+[node name="Node2D" type="Node2D" parent="Level/Level1/Door2"]
+position = Vector2(-12, -13)
+
+[node name="Line2D" type="Line2D" parent="Level/Level1/Door2/Node2D"]
+position = Vector2(-22, -22)
+scale = Vector2(0.377094, 0.379977)
+points = PackedVector2Array(-22.5, 0, 200, 0, 200, 500, 0, 500, 0, 0)
+width = 44.94
+default_color = Color(0.678431, 0.0392157, 0.176471, 1)
+
+[node name="Door3" type="Area2D" parent="Level/Level1"]
+position = Vector2(5705, 409)
+scale = Vector2(1.36214, 1.36214)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Door3"]
+position = Vector2(4.03784, 61.6221)
+shape = SubResource("RectangleShape2D_pbw6q")
+
+[node name="Node2D" type="Node2D" parent="Level/Level1/Door3"]
+position = Vector2(-12, -13)
+
+[node name="Line2D" type="Line2D" parent="Level/Level1/Door3/Node2D"]
+position = Vector2(-22, -22)
+scale = Vector2(0.377094, 0.379977)
+points = PackedVector2Array(-22.5, 0, 200, 0, 200, 500, 0, 500, 0, 0)
+width = 44.94
+default_color = Color(0.678431, 0.0392157, 0.176471, 1)
+
 [node name="Floor" type="StaticBody2D" parent="Level/Level1"]
 position = Vector2(-10, 635)
 
@@ -191,39 +413,33 @@ color = Color(0.0333789, 0.430523, 1, 1)
 position = Vector2(449, 83)
 shape = SubResource("RectangleShape2D_h1m7h")
 
-[node name="Border1" type="StaticBody2D" parent="Level/Level1"]
-position = Vector2(2298, -398)
-rotation = 1.57079
-
-[node name="ColorRect" type="ColorRect" parent="Level/Level1/Border1"]
-offset_left = -326.0
-offset_right = 1184.0
-offset_bottom = 174.0
-color = Color(0.0333789, 0.430523, 1, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Border1"]
-position = Vector2(449, 83)
-shape = SubResource("RectangleShape2D_h1m7h")
-
 [node name="AreaSwitch" parent="Level/Level1" instance=ExtResource("4_rgh2o")]
-position = Vector2(193, 586)
+position = Vector2(1046.64, 586)
 permenant = true
 
 [node name="AreaSwitch2" parent="Level/Level1" instance=ExtResource("4_rgh2o")]
-position = Vector2(882, 586)
+position = Vector2(2933, 586)
 perm_ghost = true
 
 [node name="AreaSwitch3" parent="Level/Level1" instance=ExtResource("4_rgh2o")]
-position = Vector2(1518, 586)
+position = Vector2(4760, 574)
+
+[node name="AreaSwitch4" parent="Level/Level1" instance=ExtResource("4_rgh2o")]
+position = Vector2(3316, 158)
+ghost_only = true
+
+[node name="AreaSwitch5" parent="Level/Level1" instance=ExtResource("4_rgh2o")]
+position = Vector2(5449, 542)
+ghost_only = true
 
 [node name="Tutorial" type="Node2D" parent="Level/Level1"]
 position = Vector2(-48, -700)
 scale = Vector2(1.32452, 1.32452)
 
 [node name="ColorRect" type="ColorRect" parent="Level/Level1/Tutorial"]
-offset_left = 35.0
+offset_left = 679.491
 offset_top = 764.0
-offset_right = 291.0
+offset_right = 935.491
 offset_bottom = 838.0
 color = Color(0.140447, 0.140447, 0.140447, 1)
 
@@ -239,9 +455,9 @@ activated"
 horizontal_alignment = 1
 
 [node name="ColorRect2" type="ColorRect" parent="Level/Level1/Tutorial"]
-offset_left = 536.045
+offset_left = 2091.32
 offset_top = 762.0
-offset_right = 814.045
+offset_right = 2369.32
 offset_bottom = 838.0
 color = Color(0.140447, 0.140447, 0.140447, 1)
 
@@ -256,10 +472,48 @@ keep them active until the
 recording ends"
 horizontal_alignment = 1
 
+[node name="ColorRect4" type="ColorRect" parent="Level/Level1/Tutorial"]
+offset_left = 1622.0
+offset_top = 507.0
+offset_right = 1909.0
+offset_bottom = 607.0
+color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="Label" type="Label" parent="Level/Level1/Tutorial/ColorRect4"]
+layout_mode = 0
+offset_right = 2554.0
+offset_bottom = 891.0
+scale = Vector2(0.112229, 0.112229)
+theme_override_font_sizes/font_size = 161
+text = "Pressing 'R' allows you to start
+recording the actions that you 
+in game, you can press 'R' again
+to end the recoding early."
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="Level/Level1/Tutorial"]
+offset_left = 2380.49
+offset_top = 431.1
+offset_right = 2667.49
+offset_bottom = 531.1
+color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="Label" type="Label" parent="Level/Level1/Tutorial/ColorRect5"]
+layout_mode = 0
+offset_right = 2554.0
+offset_bottom = 891.0
+scale = Vector2(0.112229, 0.112229)
+theme_override_font_sizes/font_size = 161
+text = "Black means only the ghost can
+interact with the area. It activates
+when it enteres and deactivates
+when it leaves."
+horizontal_alignment = 1
+
 [node name="ColorRect3" type="ColorRect" parent="Level/Level1/Tutorial"]
-offset_left = 1020.75
+offset_left = 3482.02
 offset_top = 738.0
-offset_right = 1276.75
+offset_right = 3738.02
 offset_bottom = 837.0
 color = Color(0.140447, 0.140447, 0.140447, 1)
 
@@ -275,7 +529,111 @@ you leave, the area will
 turn off"
 horizontal_alignment = 1
 
+[node name="Lift" type="StaticBody2D" parent="Level/Level1"]
+position = Vector2(1929, 320)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Level1/Lift"]
+offset_top = -723.0
+offset_right = 40.0
+offset_bottom = 315.0
+color = Color(3.60981e-07, 0.4053, 0.405614, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Lift"]
+position = Vector2(20, -203.5)
+shape = SubResource("RectangleShape2D_0sclb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Level1/Lift"]
+libraries = {
+&"": SubResource("AnimationLibrary_c4ay3")
+}
+
+[node name="Lift2" type="StaticBody2D" parent="Level/Level1"]
+position = Vector2(3828, 320)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Level1/Lift2"]
+offset_top = -723.0
+offset_right = 40.0
+offset_bottom = 315.0
+color = Color(3.60981e-07, 0.4053, 0.405614, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Lift2"]
+position = Vector2(20, -203.5)
+shape = SubResource("RectangleShape2D_0sclb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Level1/Lift2"]
+libraries = {
+&"": SubResource("AnimationLibrary_5jffn")
+}
+
+[node name="Lift3" type="StaticBody2D" parent="Level/Level1"]
+position = Vector2(5122, 320)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Level1/Lift3"]
+offset_top = -723.0
+offset_right = 40.0
+offset_bottom = 315.0
+color = Color(3.60981e-07, 0.4053, 0.405614, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Lift3"]
+position = Vector2(20, -203.5)
+shape = SubResource("RectangleShape2D_0sclb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Level1/Lift3"]
+libraries = {
+&"": SubResource("AnimationLibrary_xvtyr")
+}
+
+[node name="Lift4" type="StaticBody2D" parent="Level/Level1"]
+position = Vector2(5808, 320)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Level1/Lift4"]
+offset_top = -723.0
+offset_right = 40.0
+offset_bottom = 315.0
+color = Color(3.60981e-07, 0.4053, 0.405614, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/Lift4"]
+position = Vector2(20, -203.5)
+shape = SubResource("RectangleShape2D_0sclb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Level1/Lift4"]
+libraries = {
+&"": SubResource("AnimationLibrary_4yxf6")
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level/Level1"]
+position = Vector2(3788, 44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/StaticBody2D"]
+position = Vector2(-53, 20)
+shape = SubResource("RectangleShape2D_kpo4j")
+
+[node name="ColorRect" type="ColorRect" parent="Level/Level1/StaticBody2D"]
+offset_left = -146.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.552941, 1, 1, 1)
+
+[node name="MovingPlat" type="AnimatableBody2D" parent="Level/Level1"]
+position = Vector2(3105, 517)
+
+[node name="ColorRect" type="ColorRect" parent="Level/Level1/MovingPlat"]
+offset_right = 367.0
+offset_bottom = 40.0
+color = Color(0.270588, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/MovingPlat"]
+position = Vector2(183.5, 20)
+shape = SubResource("RectangleShape2D_4n42c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Level1/MovingPlat"]
+libraries = {
+&"": SubResource("AnimationLibrary_4n42c")
+}
+speed_scale = 0.429
+
 [node name="Level2" type="Node2D" parent="Level"]
+position = Vector2(3635, 0)
 script = ExtResource("3_erwvk")
 
 [node name="Door" type="Area2D" parent="Level/Level2"]
@@ -363,6 +721,7 @@ position = Vector2(449, 83)
 shape = SubResource("RectangleShape2D_h1m7h")
 
 [node name="Level3" type="Node2D" parent="Level"]
+position = Vector2(3635, 0)
 
 [node name="Border1" type="StaticBody2D" parent="Level/Level3"]
 position = Vector2(7261, -398)
@@ -411,17 +770,22 @@ position = Vector2(-9.5, -11.5)
 shape = SubResource("RectangleShape2D_2w5on")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(2367, 1001)
+position = Vector2(-22, 1001)
 script = ExtResource("2_rgh2o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(34.5, -77.5)
 shape = SubResource("RectangleShape2D_v1gob")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(34.5, -78)
-scale = Vector2(0.347656, 228)
-texture = SubResource("GradientTexture1D_50glp")
+[node name="Face" type="Sprite2D" parent="Player"]
+position = Vector2(34.5001, -174)
+scale = Vector2(8.89998, 7.1)
+texture = ExtResource("5_346fj")
+
+[node name="body" type="Sprite2D" parent="Player"]
+position = Vector2(34.5001, -62.5)
+scale = Vector2(8.89998, 9.85)
+texture = ExtResource("6_0sclb")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player"]
 
@@ -443,7 +807,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(332, -461)
+position = Vector2(332, -386)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
@@ -478,15 +842,21 @@ collision_mask = 2
 script = ExtResource("3_pbw6q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost"]
-position = Vector2(25.75, -53.25)
+position = Vector2(25.5, -53.25)
 shape = SubResource("RectangleShape2D_rgh2o")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Ghost"]
-self_modulate = Color(1, 1, 1, 0.396078)
-position = Vector2(26, -53)
-scale = Vector2(0.34375, 228)
-texture = SubResource("GradientTexture1D_50glp")
+[node name="Face" type="Sprite2D" parent="Ghost"]
+self_modulate = Color(1, 0, 1, 0.427451)
+position = Vector2(25.4999, -149.25)
+scale = Vector2(8.89998, 7.1)
+texture = ExtResource("5_346fj")
+
+[node name="body" type="Sprite2D" parent="Ghost"]
+self_modulate = Color(1, 0, 1, 0.427451)
+position = Vector2(25.4999, -35.374)
+scale = Vector2(8.89998, 9.6124)
+texture = ExtResource("6_0sclb")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
@@ -576,12 +946,16 @@ texture = ExtResource("14_jyqft")
 centered = false
 
 [connection signal="body_entered" from="Level/Level1/Door" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Level/Level1/Door2" to="." method="_on_door_2_body_entered"]
+[connection signal="body_entered" from="Level/Level1/Door3" to="." method="_on_door_3_body_entered"]
 [connection signal="entered" from="Level/Level1/AreaSwitch" to="." method="_on_area_switch_entered"]
-[connection signal="left" from="Level/Level1/AreaSwitch" to="." method="_on_area_switch_left"]
 [connection signal="entered" from="Level/Level1/AreaSwitch2" to="." method="_on_area_switch_2_entered"]
 [connection signal="left" from="Level/Level1/AreaSwitch2" to="." method="_on_area_switch_2_left"]
 [connection signal="entered" from="Level/Level1/AreaSwitch3" to="." method="_on_area_switch_3_entered"]
 [connection signal="left" from="Level/Level1/AreaSwitch3" to="." method="_on_area_switch_3_left"]
+[connection signal="entered" from="Level/Level1/AreaSwitch4" to="." method="_on_area_switch_4_entered"]
+[connection signal="entered" from="Level/Level1/AreaSwitch5" to="." method="_on_area_switch_5_entered"]
+[connection signal="left" from="Level/Level1/AreaSwitch5" to="." method="_on_area_switch_5_left"]
 [connection signal="body_entered" from="Level/Level2/Door" to="Level/Level2" method="_on_door_body_entered"]
 [connection signal="body_exited" from="Level/Level2/Door" to="Level/Level2" method="_on_door_body_exited"]
 [connection signal="entered" from="Level/Level2/AreaSwitch" to="Level/Level2" method="_on_area_switch_entered"]
