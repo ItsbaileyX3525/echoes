@@ -1,9 +1,10 @@
-[gd_scene load_steps=52 format=3 uid="uid://ds1isc65v0qum"]
+[gd_scene load_steps=61 format=3 uid="uid://ds1isc65v0qum"]
 
 [ext_resource type="Script" uid="uid://dkoo6du2yaqj1" path="res://Scripts/Main.gd" id="1_kln2b"]
 [ext_resource type="Script" uid="uid://boor1cxpmudia" path="res://Scripts/Player.gd" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://dm7oykndl8y2w" path="res://Scripts/Level_2.gd" id="3_erwvk"]
 [ext_resource type="Script" uid="uid://kmy25cjmscoy" path="res://Scripts/Ghost.gd" id="3_pbw6q"]
+[ext_resource type="Shader" uid="uid://d2fib2mibummv" path="res://Shaders/RoundedCornersColorRect.gdshader" id="3_sxkr1"]
 [ext_resource type="Texture2D" uid="uid://cdx22070og4ih" path="res://Assets/Decals/grey-circle.png" id="4_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://di441bee70a2b" path="res://Scenes/AreaSwitch.tscn" id="4_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://d3owrqoaan6po" path="res://Assets/paralax/10_Sky.png" id="5_1p5hy"]
@@ -18,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ja8hcahxa6p" path="res://Assets/paralax/03_Particles.png" id="12_fq0cl"]
 [ext_resource type="Texture2D" uid="uid://b7bvr120sv0qm" path="res://Assets/paralax/02_Bushes.png" id="13_hwpts"]
 [ext_resource type="Texture2D" uid="uid://bqvoxif32qjqp" path="res://Assets/paralax/01_Mist.png" id="14_jyqft"]
+[ext_resource type="AudioStream" uid="uid://sel8julru8nq" path="res://Assets/Audio/King_Crimson.mp3" id="19_0sclb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbw6q"]
 size = Vector2(90.299, 201.244)
@@ -27,6 +29,31 @@ size = Vector2(67262, 166)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1m7h"]
 size = Vector2(1496, 166)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fq0cl"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(400, 100)
+shader_parameter/radius = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwpts"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(400, 100)
+shader_parameter/radius = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxkr1"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(400, 100)
+shader_parameter/radius = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jyqft"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(400, 100)
+shader_parameter/radius = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3tgeq"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(400, 100)
+shader_parameter/radius = 20.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0sclb"]
 size = Vector2(40, 1033)
@@ -179,6 +206,11 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpo4j"]
 size = Vector2(186, 40)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4ay3"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(400, 100)
+shader_parameter/radius = 20.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n42c"]
 size = Vector2(367, 40)
 
@@ -310,6 +342,11 @@ size = Vector2(67262, 103)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1gob"]
 size = Vector2(89, 227)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aht7i"]
+shader = ExtResource("3_sxkr1")
+shader_parameter/rect_size = Vector2(600, 100)
+shader_parameter/radius = 20.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgh2o"]
 size = Vector2(89, 227.5)
 
@@ -437,6 +474,7 @@ position = Vector2(-48, -700)
 scale = Vector2(1.32452, 1.32452)
 
 [node name="ColorRect" type="ColorRect" parent="Level/Level1/Tutorial"]
+material = SubResource("ShaderMaterial_fq0cl")
 offset_left = 679.491
 offset_top = 764.0
 offset_right = 935.491
@@ -455,6 +493,7 @@ activated"
 horizontal_alignment = 1
 
 [node name="ColorRect2" type="ColorRect" parent="Level/Level1/Tutorial"]
+material = SubResource("ShaderMaterial_hwpts")
 offset_left = 2091.32
 offset_top = 762.0
 offset_right = 2369.32
@@ -473,6 +512,7 @@ recording ends"
 horizontal_alignment = 1
 
 [node name="ColorRect4" type="ColorRect" parent="Level/Level1/Tutorial"]
+material = SubResource("ShaderMaterial_sxkr1")
 offset_left = 1622.0
 offset_top = 507.0
 offset_right = 1909.0
@@ -492,6 +532,7 @@ to end the recoding early."
 horizontal_alignment = 1
 
 [node name="ColorRect5" type="ColorRect" parent="Level/Level1/Tutorial"]
+material = SubResource("ShaderMaterial_jyqft")
 offset_left = 2380.49
 offset_top = 431.1
 offset_right = 2667.49
@@ -511,6 +552,7 @@ when it leaves."
 horizontal_alignment = 1
 
 [node name="ColorRect3" type="ColorRect" parent="Level/Level1/Tutorial"]
+material = SubResource("ShaderMaterial_3tgeq")
 offset_left = 3482.02
 offset_top = 738.0
 offset_right = 3738.02
@@ -618,6 +660,7 @@ color = Color(0.552941, 1, 1, 1)
 position = Vector2(3105, 517)
 
 [node name="ColorRect" type="ColorRect" parent="Level/Level1/MovingPlat"]
+material = SubResource("ShaderMaterial_c4ay3")
 offset_right = 367.0
 offset_bottom = 40.0
 color = Color(0.270588, 1, 1, 1)
@@ -625,6 +668,7 @@ color = Color(0.270588, 1, 1, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Level1/MovingPlat"]
 position = Vector2(183.5, 20)
 shape = SubResource("RectangleShape2D_4n42c")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Level/Level1/MovingPlat"]
 libraries = {
@@ -656,7 +700,6 @@ default_color = Color(0.678431, 0.0392157, 0.176471, 1)
 
 [node name="AreaSwitch" parent="Level/Level2" instance=ExtResource("4_rgh2o")]
 position = Vector2(2618, 517)
-perm_ghost = true
 
 [node name="AreaSwitch2" parent="Level/Level2" instance=ExtResource("4_rgh2o")]
 position = Vector2(3614, 513)
@@ -790,6 +833,7 @@ texture = ExtResource("6_0sclb")
 [node name="CanvasLayer" type="CanvasLayer" parent="Player"]
 
 [node name="ColorRect" type="ColorRect" parent="Player/CanvasLayer"]
+material = SubResource("ShaderMaterial_aht7i")
 offset_left = 26.0
 offset_top = 14.0
 offset_right = 589.0
@@ -860,6 +904,10 @@ texture = ExtResource("6_0sclb")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
+
+[node name="ReplayTimer" type="Timer" parent="."]
+wait_time = 0.9
 one_shot = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -945,6 +993,10 @@ visible = false
 texture = ExtResource("14_jyqft")
 centered = false
 
+[node name="KC" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_0sclb")
+volume_db = -29.18
+
 [connection signal="body_entered" from="Level/Level1/Door" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Level/Level1/Door2" to="." method="_on_door_2_body_entered"]
 [connection signal="body_entered" from="Level/Level1/Door3" to="." method="_on_door_3_body_entered"]
@@ -954,6 +1006,7 @@ centered = false
 [connection signal="entered" from="Level/Level1/AreaSwitch3" to="." method="_on_area_switch_3_entered"]
 [connection signal="left" from="Level/Level1/AreaSwitch3" to="." method="_on_area_switch_3_left"]
 [connection signal="entered" from="Level/Level1/AreaSwitch4" to="." method="_on_area_switch_4_entered"]
+[connection signal="left" from="Level/Level1/AreaSwitch4" to="." method="_on_area_switch_4_left"]
 [connection signal="entered" from="Level/Level1/AreaSwitch5" to="." method="_on_area_switch_5_entered"]
 [connection signal="left" from="Level/Level1/AreaSwitch5" to="." method="_on_area_switch_5_left"]
 [connection signal="body_entered" from="Level/Level2/Door" to="Level/Level2" method="_on_door_body_entered"]
@@ -966,3 +1019,4 @@ centered = false
 [connection signal="entered" from="Level/Level2/AreaSwitch4" to="Level/Level2" method="_on_area_switch_4_entered"]
 [connection signal="left" from="Level/Level2/AreaSwitch4" to="Level/Level2" method="_on_area_switch_4_left"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReplayTimer" to="." method="_on_replay_timer_timeout"]

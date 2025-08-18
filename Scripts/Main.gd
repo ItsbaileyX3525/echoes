@@ -10,6 +10,8 @@ extends Node2D
 @onready var door2: Line2D = $Level/Level1/Door2/Node2D/Line2D
 @onready var door3: Line2D = $Level/Level1/Door3/Node2D/Line2D
 @onready var lift3_anim: AnimationPlayer = $Level/Level1/Lift3/AnimationPlayer
+@onready var kc: AudioStreamPlayer = $KC
+@onready var replay_timer: Timer = $ReplayTimer
 
 var can_continue: bool = false
 var bodies_stored: Array = []
@@ -24,7 +26,8 @@ var on_level: int = 0
 
 @onready var levels: Array = [
 	$Level/Level1,
-	$Level/Level2
+	$Level/Level2,
+	$Level/Level3,
 ]
 
 func _ready() -> void:
@@ -35,12 +38,15 @@ func _ready() -> void:
 	label.text = "Press R to record"
 
 func _process(delta: float) -> void:
+	print(on_level)
 	if Input.is_action_just_pressed("restart"):
 		match state:
 			State.IDLE:
 				start_recording()
 			State.RECORDING:
-				stop_recording_and_replay()
+				replay_timer.start()
+				kc.play()
+				state = State.REPLAYING
 			State.REPLAYING:
 				pass
 
@@ -65,7 +71,12 @@ func stop_recording_and_replay() -> void:
 
 func _on_timer_timeout() -> void:
 	if state == State.RECORDING:
-		stop_recording_and_replay()
+		kc.play()
+		replay_timer.start()
+		state = State.REPLAYING
+
+func _on_replay_timer_timeout() -> void:
+	stop_recording_and_replay()
 
 func _on_ghost_finished() -> void:
 	state = State.IDLE
@@ -83,15 +94,21 @@ func clear_recording() -> void:
 			if e.perm_ghost:
 				e.reset_state()
 
+var lifted1: bool = false
+var lifted2: bool = false
+
+var can_enter2: bool = false
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and not lifted1:
 		$Level/Level1/Lift/AnimationPlayer.play("move")
 
 func _on_area_switch_entered() -> void:
 	door1.default_color = Color.from_rgba8(50, 205, 50, 255)
 
 func _on_door_2_body_entered(body: Node2D) -> void:
-	$Level/Level1/Lift2/AnimationPlayer.play("move")
+	if body.name == "Player" and not lifted2 and can_enter2:
+		$Level/Level1/Lift2/AnimationPlayer.play("move")
 
 func _on_area_switch_2_entered() -> void:
 	moving_plat_anim.play("move")
@@ -100,8 +117,13 @@ func _on_area_switch_2_left() -> void:
 	moving_plat_anim.pause()
 
 func _on_area_switch_4_entered() -> void:
+	can_enter2 = true
 	door2.default_color = Color.from_rgba8(50, 205, 50, 255)
-
+	
+func _on_area_switch_4_left() -> void:
+	can_enter2 = false
+	door2.default_color = Color.from_rgba8(173, 10, 45, 255)
+	
 func _on_door_3_body_entered(body: Node2D) -> void:
 	bodies_stored.append(body)
 	if body.name == "Player" and can_continue and not tutorial_beat:

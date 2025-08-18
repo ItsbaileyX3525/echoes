@@ -1,4 +1,29 @@
-[gd_scene format=3 uid="uid://cek6fiv5gilbr"]
+[gd_scene load_steps=7 format=3 uid="uid://cek6fiv5gilbr"]
+
+[ext_resource type="Shader" uid="uid://8ikiw0risvwb" path="res://Shaders/Glitch.gdshader" id="1_28flt"]
+[ext_resource type="Script" uid="uid://bqy2j757wjjwl" path="res://Scripts/main_menu.gd" id="1_48xlc"]
+[ext_resource type="Shader" uid="uid://c522ke5af73ef" path="res://Shaders/Particles.gdshader" id="2_1ehe0"]
+[ext_resource type="Theme" uid="uid://j2qymavuknfa" path="res://Assets/Themes/UI.tres" id="2_48xlc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ce3w2"]
+shader = ExtResource("2_1ehe0")
+shader_parameter/time_scale = 1.0
+shader_parameter/particle_count = 50
+shader_parameter/particle_size = 0.002
+shader_parameter/particle_speed = 1e-07
+shader_parameter/particle_color = Color(0.8, 1, 0.9, 1)
+shader_parameter/particle_brightness = 0.5
+shader_parameter/bg_color1 = Color(0.1, 0.6, 0.55, 1)
+shader_parameter/bg_color2 = Color(0.05, 0.8, 0.7, 1)
+shader_parameter/bg_noise_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
+shader = ExtResource("1_28flt")
+shader_parameter/red_offset = -0.006
+shader_parameter/blue_offset = 0.008
+shader_parameter/animate_offset = true
+shader_parameter/animation_speed = 5.0
+shader_parameter/animation_strength = 0.003
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +32,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_48xlc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ce3w2")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1080.0
+color = Color(3.36915e-06, 0.628389, 0.632073, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_right = 2329.0
+offset_bottom = 263.0
+scale = Vector2(0.824443, 0.824443)
+theme_override_font_sizes/font_size = 201
+text = "Echoes"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_n45e2")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 300.0
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 2
+offset_left = 603.0
+offset_top = 218.0
+offset_right = 1587.0
+offset_bottom = 478.0
+scale = Vector2(0.746977, 0.746977)
+theme = ExtResource("2_48xlc")
+theme_override_font_sizes/font_size = 200
+text = "START"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 2
+offset_left = 603.0
+offset_top = 455.0
+offset_right = 1587.0
+offset_bottom = 715.0
+scale = Vector2(0.746977, 0.746977)
+theme = ExtResource("2_48xlc")
+theme_override_font_sizes/font_size = 200
+text = " OPTIONS "
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 603.0
+offset_top = 683.0
+offset_right = 1587.0
+offset_bottom = 943.0
+scale = Vector2(0.746977, 0.746977)
+theme = ExtResource("2_48xlc")
+theme_override_font_sizes/font_size = 200
+text = "EXIT"
+
+[connection signal="button_down" from="Start" to="." method="_on_start_button_down"]
+[connection signal="button_up" from="Start" to="." method="_on_start_button_up"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="button_down" from="Options" to="." method="_on_options_button_down"]
+[connection signal="button_up" from="Options" to="." method="_on_options_button_up"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="button_down" from="Quit" to="." method="_on_quit_button_down"]
+[connection signal="button_up" from="Quit" to="." method="_on_quit_button_up"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
