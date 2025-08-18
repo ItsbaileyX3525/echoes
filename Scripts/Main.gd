@@ -5,6 +5,7 @@ extends Node2D
 @onready var label = $TimerLabel
 @onready var initial_position: Node2D = $InitialPosition
 @onready var timer: Timer = $Timer
+@onready var level: Node2D = $Level
 
 enum State { IDLE, RECORDING, REPLAYING }
 var state: State = State.IDLE
@@ -60,3 +61,7 @@ func clear_recording() -> void:
 	player.is_recording = false
 	ghost.hide()
 	ghost.position.y = 99999
+	for e in level.get_children():
+		if e.name.rstrip("1234567890") == "AreaSwitch":
+			if e.perm_ghost:
+				e.reset_state()
