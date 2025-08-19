@@ -1,6 +1,12 @@
 # Echoes
 
-Echoes is a Godot Engine project featuring a collection of scenes, scripts, shaders, and assets for a 2D game. The project includes custom plugins, parallax backgrounds, audio, and a variety of gameplay scripts.
+Echoes is a game made in the Godot game engine that gives you an ability called "Recording" which lets you record your actions for 10 seconds, allowing you to beat otherwise impossible puzzles by yourself!
+
+## How to beat the game
+
+You can follow the tutorial below for how to beat the game!
+
+<span style="font-size:2em;">[Video tutorial](https://youtu.be/72-Ell4qoFk)</span>
 
 ## Features
 - Multiple levels and scenes (e.g., `Main.tscn`, `AreaSwitch.tscn`, `Complete.tscn`)
@@ -23,10 +29,3 @@ Echoes is a Godot Engine project featuring a collection of scenes, scripts, shad
 
 
 *Made with [Godot Engine](https://godotengine.org/)*
-
-
-## How to beat the game
-
-You can follow the tutorial below for how to beat the game!
-
-[Video tutorial]()
