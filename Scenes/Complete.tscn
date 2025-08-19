@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxncjsl1juhyg"]
+
+[ext_resource type="Script" uid="uid://cg56vm85v3tji" path="res://Scripts/Outro.gd" id="1_ebwya"]
+[ext_resource type="Shader" uid="uid://c522ke5af73ef" path="res://Shaders/Particles.gdshader" id="2_f6hig"]
+[ext_resource type="Shader" uid="uid://8ikiw0risvwb" path="res://Shaders/Glitch.gdshader" id="3_a362e"]
+[ext_resource type="Theme" uid="uid://j2qymavuknfa" path="res://Assets/Themes/UI.tres" id="4_x8cvm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tid82"]
+shader = ExtResource("2_f6hig")
+shader_parameter/time_scale = 1.0
+shader_parameter/particle_count = 50
+shader_parameter/particle_size = 0.002
+shader_parameter/particle_speed = 1e-07
+shader_parameter/particle_color = Color(0.8, 1, 0.9, 1)
+shader_parameter/particle_brightness = 0.5
+shader_parameter/bg_color1 = Color(0.1, 0.6, 0.55, 1)
+shader_parameter/bg_color2 = Color(0.05, 0.8, 0.7, 1)
+shader_parameter/bg_noise_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wq0ky"]
+shader = ExtResource("3_a362e")
+shader_parameter/red_offset = -0.006
+shader_parameter/blue_offset = 0.008
+shader_parameter/animate_offset = true
+shader_parameter/animation_speed = 5.0
+shader_parameter/animation_strength = 0.003
+
+[node name="Complete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ebwya")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tid82")
+offset_right = 1922.0
+offset_bottom = 1080.0
+color = Color(3.36915e-06, 0.628389, 0.632073, 1)
+
+[node name="Title" type="Label" parent="."]
+visible = false
+offset_right = 2329.0
+offset_bottom = 263.0
+scale = Vector2(0.824443, 0.824443)
+theme_override_font_sizes/font_size = 201
+text = "Echoes"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wq0ky")
+offset_right = 1922.0
+offset_bottom = 300.0
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 859)
+
+[node name="Label" type="Label" parent="Node2D"]
+offset_top = 273.0
+offset_right = 8988.0
+offset_bottom = 3600.0
+scale = Vector2(0.213844, 0.213844)
+theme_override_colors/font_color = Color(0.839216, 0.988235, 0, 1)
+theme_override_font_sizes/font_size = 281
+text = "Game design - Bailey
+
+Main coder - Bailey
+
+Name - Claude <3
+
+Playtesters - Phil & Me!!!
+
+Dedicated to all to everyone at summer of making!
+
+Thank you so much for playing <3333"
+horizontal_alignment = 1
+
+[node name="Quit" type="Button" parent="Node2D"]
+offset_left = 610.0
+offset_top = 1631.0
+offset_right = 1594.0
+offset_bottom = 1891.0
+scale = Vector2(0.746977, 0.746977)
+theme = ExtResource("4_x8cvm")
+theme_override_font_sizes/font_size = 200
+text = "EXIT"
+
+[connection signal="button_down" from="Node2D/Quit" to="." method="_on_quit_button_down"]
+[connection signal="button_up" from="Node2D/Quit" to="." method="_on_quit_button_up"]
+[connection signal="pressed" from="Node2D/Quit" to="." method="_on_quit_pressed"]

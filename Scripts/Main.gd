@@ -29,6 +29,7 @@ var tutorial_beat: bool = false
 	$Level/Level2,
 	$Level/Level3,
 	$Level/Level4,
+	$Level/Level5,
 ]
 
 func _ready() -> void:
@@ -151,3 +152,16 @@ func _on_area_switch_5_left() -> void:
 	can_continue = false
 	if not tutorial_beat:
 		door3.default_color = Color.from_rgba8(173, 10, 45, 255)
+
+func _on_force_stop_body_entered(body: Node2D) -> void:
+	if state == State.RECORDING:
+		state = State.IDLE
+		label.text = "Replay stopped! Press R to record again"
+		clear_recording()
+
+
+func _on_force_stop_2_body_entered(body: Node2D) -> void:
+	if state == State.RECORDING:
+		state = State.IDLE
+		label.text = "Replay stopped! Press R to record again"
+		clear_recording()
