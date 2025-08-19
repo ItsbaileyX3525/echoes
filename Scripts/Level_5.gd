@@ -19,6 +19,7 @@ func update_checklist(update: bool) -> void:
 		check_list -= 1
 		
 	if check_list >= max_check_list:
+		beat_level_5 = true
 		door.default_color = Color.from_rgba8(50, 205, 50, 255)
 		if len(stored_bodies) > 0 and not beat_level_5:
 			for e in stored_bodies:
@@ -28,12 +29,12 @@ func update_checklist(update: bool) -> void:
 					get_tree().change_scene_to_file("res://Scenes/Complete.tscn")
 	else:
 		door.default_color = Color.from_rgba8(173, 10, 45, 255)
+		beat_level_5 = false
 
 func _on_door_body_entered(body: Node2D) -> void:
 	stored_bodies.append(body)
-	if body.name == "Player":
+	if body.name == "Player" and beat_level_5:
 		door.default_color = Color.from_rgba8(50, 205, 50, 255)
-		beat_level_5 = true
 		main.on_level += 0
 		get_tree().change_scene_to_file("res://Scenes/Complete.tscn")
 

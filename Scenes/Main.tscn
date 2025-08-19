@@ -1593,7 +1593,7 @@ position = Vector2(-9.5, -11.5)
 shape = SubResource("RectangleShape2D_2w5on")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(-14, 1001)
+position = Vector2(-34, 1001)
 script = ExtResource("2_rgh2o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
